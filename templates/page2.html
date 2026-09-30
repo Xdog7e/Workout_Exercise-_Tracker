@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+<p class="lead">ดูรายละเอียดของท่าออกกำลังกายและการคำนวณแคลอรี่ โดยข้อมูลหลักจัดการจากหน้า “ตารางออกกำลังกาย”</p>
+
+<div class="two-col">
+  <div class="panel">
+    <h2 style="margin-top:0">เลือกท่าออกกำลังกาย</h2>
+    {% if items %}
+    <table>
+      <thead>
+        <tr><th>ท่า</th><th>กล้ามเนื้อ</th><th class="num">แคลอรี่รวม</th></tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <td><a href="{{ url_for('page', name='page2') }}?exercise={{ item.no }}">{{ item.name }}</a></td>
+          <td>{{ item.muscle_group }}</td>
+          <td class="num">{{ item.total_calories }} kcal</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="empty">ยังไม่มีท่าออกกำลังกายในระบบ</div>
+    {% endif %}
+  </div>
+
+  <div class="panel">
+    {% if selected %}
+    <h2 style="margin-top:0">{{ selected.name }}</h2>
+    <p><span class="badge">{{ selected.muscle_group }}</span> <span class="badge">{{ selected.difficulty }}</span></p>
+    <p><strong>วันที่ฝึก:</strong> {{ selected.day }}</p>
+    <p><strong>จำนวน:</strong> {{ selected.sets }} เซต × {{ selected.reps }} ครั้ง</p>
+    <p><strong>แคลอรี่ต่อเซต:</strong> {{ selected.calories_per_set }} kcal</p>
+    <p><strong>แคลอรี่รวม:</strong> {{ selected.total_calories }} kcal</p>
+    <a class="btn small ghost" href="{{ url_for('page', name='page2') }}">แสดงทั้งหมด</a>
+    {% else %}
+    <h2 style="margin-top:0">รายละเอียดท่า</h2>
+    <div class="empty">เลือกชื่อท่าทางด้านซ้ายเพื่อดูรายละเอียด</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

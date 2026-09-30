@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+
+<div class="stat-grid">
+	<div class="stat"><div class="label">จำนวนท่า</div><div class="value">{{ count }}</div><div class="unit">ท่า</div></div>
+	<div class="stat gold"><div class="label">แคลอรี่รวม</div><div class="value">{{ "{:,.0f}".format(total_calories) }}</div><div class="unit">กิโลแคลอรี่</div></div>
+	<div class="stat"><div class="label">แคลอรี่เฉลี่ยต่อท่า</div><div class="value">{{ "{:,.1f}".format(average_calories) }}</div><div class="unit">กิโลแคลอรี่</div></div>
+</div>
+
+<h2>แคลอรี่ตามกลุ่มกล้ามเนื้อ</h2>
+<div class="panel">
+  {% for bar in bars %}
+    <div class="bar-row">
+      <span>{{ bar.label }}</span>
+      <div class="bar-track">
+        <div class="bar-fill" {{ ('style="width: ' ~ bar.percent ~ '%;"') | safe }}></div>
+      </div>
+      <span class="num">{{ "{:,.0f}".format(bar.value) }}</span>
+    </div>
+  {% else %}
+    <div class="empty">ยังไม่มีข้อมูลการออกกำลังกาย</div>
+  {% endfor %}
+</div>
+
+<h2>ท่าที่ใช้พลังงานสูงสุดและต่ำสุด</h2>
+<table>
+	<tr><th></th><th>ชื่อท่า</th><th>กลุ่มกล้ามเนื้อ</th><th class="num">แคลอรี่</th></tr>
+	{% if most_calories %}
+	<tr><td><span class="badge bad">สูงสุด</span></td><td>{{ most_calories.name }}</td><td>{{ most_calories.muscle_group }}</td><td class="num">{{ most_calories.calories }}</td></tr>
+	{% endif %}
+	{% if least_calories %}
+	<tr><td><span class="badge good">ต่ำสุด</span></td><td>{{ least_calories.name }}</td><td>{{ least_calories.muscle_group }}</td><td class="num">{{ least_calories.calories }}</td></tr>
+	{% endif %}
+</table>
+{% endblock %}

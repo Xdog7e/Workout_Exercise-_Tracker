@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+<p class="lead">ทั้งหมด {{ count }} ท่า · เผาผลาญรวมประมาณ {{ total_calories_all }} kcal/สัปดาห์</p>
+
+<div class="two-col">
+  <form method="post" class="panel">
+    <h2 style="margin-top:0">{{ "แก้ไขท่า" if edit_item else "เพิ่มท่าใหม่" }}</h2>
+    {% if edit_item %}
+    <input type="hidden" name="edit" value="{{ edit_no }}">
+    {% endif %}
+    <div class="field">
+      <label for="name">ชื่อท่า</label>
+      <input id="name" name="name" placeholder="เช่น Push-up" value="{{ edit_item.name if edit_item else '' }}">
+    </div>
+    <div class="field">
+      <label for="muscle_group">กลุ่มกล้ามเนื้อ</label>
+      <input id="muscle_group" name="muscle_group" placeholder="เช่น อก" value="{{ edit_item.muscle_group if edit_item else '' }}">
+    </div>
+    <div class="field">
+      <label for="day">วันที่ฝึก</label>
+      <select id="day" name="day">
+        {% for d in days %}
+        <option value="{{ d }}" {{ "selected" if edit_item and edit_item.day == d }}>{{ d }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="sets">จำนวนเซต</label>
+      <input id="sets" name="sets" inputmode="numeric" placeholder="3" value="{{ edit_item.sets if edit_item else '' }}">
+    </div>
+    <div class="field">
+      <label for="reps">จำนวนครั้ง/เซต</label>
+      <input id="reps" name="reps" inputmode="numeric" placeholder="15" value="{{ edit_item.reps if edit_item else '' }}">
+    </div>
+    <div class="field">
+      <label for="calories_per_set">แคลอรี่/เซต</label>
+      <input id="calories_per_set" name="calories_per_set" inputmode="decimal" placeholder="8" value="{{ edit_item.calories_per_set if edit_item else '' }}">
+    </div>
+    <div class="field">
+      <label for="difficulty">ระดับความยาก</label>
+      <select id="difficulty" name="difficulty">
+        {% for diff in difficulties %}
+        <option value="{{ diff }}" {{ "selected" if edit_item and edit_item.difficulty == diff }}>{{ diff }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button class="btn" type="submit">{{ "บันทึกการแก้ไข" if edit_item else "เพิ่มท่านี้" }}</button>
+    {% if edit_item %}
+    <a href="{{ url_for('page', name='page1') }}" class="btn small ghost">ยกเลิก</a>
+    {% endif %}
+  </form>
+
+  <div class="panel">
+    <h2 style="margin-top:0">ตารางรายสัปดาห์</h2>
+    {% for day_group in week %}
+    <h3>{{ day_group.day }} <span class="badge">{{ day_group.total_calories }} kcal</span></h3>
+    {% if day_group["items"] %}
+    <table>
+      <tr>
+        <th>ท่า</th><th>กลุ่มกล้ามเนื้อ</th><th class="num">Sets</th><th class="num">Reps</th>
+        <th>ระดับ</th><th></th>
+      </tr>
+      {% for item in day_group["items"] %}
+      <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.muscle_group }}</td>
+        <td class="num">{{ item.sets }}</td>
+        <td class="num">{{ item.reps }}</td>
+        <td>
+          {% if item.is_hard %}
+            <span class="badge badge-hard">{{ item.difficulty }}</span>
+          {% else %}
+            <span class="badge">{{ item.difficulty }}</span>
+          {% endif %}
+        </td>
+        <td style="white-space:nowrap; text-align:right">
+          <a class="btn small" href="{{ url_for('page', name='page1') }}?edit={{ item.no }}">แก้ไข</a>
+          <form method="post" class="inline" onsubmit="return confirm('ลบ {{ item.name }}?')">
+            <input type="hidden" name="delete" value="{{ item.no }}">
+            <button class="btn small danger" type="submit">ลบ</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    <div class="empty">วันนี้พัก</div>
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

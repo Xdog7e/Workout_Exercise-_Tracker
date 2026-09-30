@@ -1,0 +1,8 @@
+{
+ "app.py": "75f04ee33a5af2314755a90f652ae161775737114442665f9ca121889302c4a6",
+ "storage.py": "6e700e41928d8d5182f95e0086f878aab8e6c12cceb7d9fcb163da9386c65310",
+ "check_project.py": "e900aba4c8fa67f5a69de805c8a11a8eae021f90975fe6ede20796e89eebe815",
+ "test_pages.py": "ed72edb41e7a89119cef982b24d7e170e8117f395d70e2e26745de502cd3f029",
+ "templates/base.html": "adc845ffcbfc88dfdc5bca039b47091d976c300323c3f955d51da061304e02ed",
+ "templates/_not_built.html": "ed70e0abfc9859c4522e289a7bfe5bee330174ea85f26c80c7224a7d6fbfc1cd"
+}

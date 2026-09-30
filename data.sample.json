@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Push-up",
+    "muscle_group": "อก",
+    "sets": 3,
+    "reps": 15,
+    "calories_per_set": 8,
+    "difficulty": "ง่าย"
+  },
+  {
+    "name": "Squat",
+    "muscle_group": "ขา",
+    "sets": 4,
+    "reps": 20,
+    "calories_per_set": 10,
+    "difficulty": "ปานกลาง"
+  },
+  {
+    "name": "Plank",
+    "muscle_group": "แกนกลางลำตัว",
+    "sets": 3,
+    "reps": 1,
+    "calories_per_set": 5,
+    "difficulty": "ง่าย"
+  },
+  {
+    "name": "Pull-up",
+    "muscle_group": "หลัง",
+    "sets": 3,
+    "reps": 8,
+    "calories_per_set": 12,
+    "difficulty": "ยาก"
+  },
+  {
+    "name": "Lunge",
+    "muscle_group": "ขา",
+    "sets": 3,
+    "reps": 12,
+    "calories_per_set": 9,
+    "difficulty": "ปานกลาง"
+  },
+  {
+    "name": "Burpee",
+    "muscle_group": "ทั้งตัว",
+    "sets": 3,
+    "reps": 10,
+    "calories_per_set": 14,
+    "difficulty": "ยาก"
+  }
+]

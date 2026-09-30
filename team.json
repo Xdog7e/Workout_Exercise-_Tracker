@@ -1,0 +1,13 @@
+{
+  "group": {
+    "name": "Group 09",
+    "section": "sec 06",
+    "topic": "Workout Exercise Tracker",
+    "description": "เว็บไซต์รวบรวมท่าออกกำลังกาย ช่วยดูรายการท่า คำนวณแคลอรี่ที่เผาผลาญ และสรุปสถิติการออกกำลังกายทั้งหมด"
+  },
+  "members": [
+    {"name": "นายปวริศ แดงวงศ์", "id": "69130840119", "role": "Project Lead (PM)", "task": "page1 · รายการ"},
+    {"name": "นายธนวัฒน์ บุตรทอง", "id": "69130840052", "role": "Frontend Dev (HTML/CSS)", "task": "page2 · ฟอร์ม"},
+    {"name": "นายภูวนาท สายแวว", "id": "69130840119", "role": "QA / Test (check.bat)", "task": "page3 · สถิติ"}
+  ]
+}
